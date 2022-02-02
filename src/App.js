@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Link } from "react-router-dom";
+import { StateContextProvider } from "./context/StateContext";
+import { StyledNav } from "./App.elements";
+import Books from "./views/Books";
+import Book from "./views/Book";
+import Home from "./views/Home";
+import About from "./views/About";
+import GlobalStyles from "./globalStyles";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StateContextProvider>
+      <GlobalStyles />
+      <StyledNav>
+        <Link to="/">Home</Link>
+        <Link to="/books">Books</Link>
+        <Link to="/about">About</Link>
+      </StyledNav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/books" element={<Books />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/book/:id" element={<Book />} />
+      </Routes>
+    </StateContextProvider>
   );
 }
 
